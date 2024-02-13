@@ -1,0 +1,6 @@
+event http_reply(c: connection, is_orig: bool, headers: HTTP::Headers, body: string) {
+    if ( /function\s+\w+\(\w+, \w+\) \{\s+let \w+ = '';\s+\w+ = atob\(\w+\);\s+let \w+ = \w+\.length;/ in body ) {
+        print fmt("Suspicious JavaScript function detected in HTTP response from %s to %s", c$id$orig_h, c$id$resp_h);
+        // You can also log this detection to a specific log file rather than printing
+    }
+}

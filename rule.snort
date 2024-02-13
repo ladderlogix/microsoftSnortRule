@@ -1,0 +1,1 @@
+alert tcp any any -> any any (msg:"Suspicious JavaScript function detected"; flow:to_client,established; file_data; pcre:"/function\s+\w+\(\w+,\s*\w+\)\s*\{\s*let\s+\w+\s*=\s*'';\s*\w+\s*=\s*atob\(\w+\);\s*let\s+\w+\s*=\s*\w+\.length;/"; reference:url,www.example.com; classtype:trojan-activity; sid:1000001; rev:1;)
